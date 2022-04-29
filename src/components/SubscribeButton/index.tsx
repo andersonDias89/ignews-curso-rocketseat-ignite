@@ -1,6 +1,10 @@
 import styles from './styles.module.scss'
 
-export const SibscribeButton = () => {
+interface SibscribeButtonProps {
+    priceId: string
+}
+
+export const SibscribeButton = ({priceId}: SibscribeButtonProps ) => {
     return (
         <button
             type="button"
