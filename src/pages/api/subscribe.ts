@@ -1,13 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from 'next-auth/react';
-import { query as q } from 'faunadb';
+import { query as q, Ref } from 'faunadb';
 import { fauna } from "../../services/fauna";
 import { stripe } from "../../services/stripe";
 
 type User = {
-  ref: {
-    id: string;
-  }
+  ref: typeof Ref,
   data: {
     stripe_customer_id: string;
   }
@@ -36,7 +34,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   
       await fauna.query(
         q.Update(
-          q.Ref(q.Collection('users'), user.ref.id),
+          user.ref,
           {
             data: { 
               stripe_customer_id: stripeCustomer.id,

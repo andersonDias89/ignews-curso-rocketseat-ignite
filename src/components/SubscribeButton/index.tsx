@@ -26,7 +26,7 @@ export const SibscribeButton = ({ priceId }: SibscribeButtonProps) => {
 
             await stripe!.redirectToCheckout({sessionId})
         } catch (err){
-            alert('Erro no envio')
+           alert(err)
         }
     }
 
